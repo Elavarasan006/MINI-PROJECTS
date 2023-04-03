@@ -1,0 +1,66 @@
+# List to store available seats
+seats = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Dictionary to store booking information
+bookings = {}
+
+# Function to display available seats
+def display_available_seats():
+    print("Available seats are:", end=" ")
+    for seat in seats:
+        print(seat, end=" ")
+    print()
+
+# Function to book a ticket
+def book_ticket():
+    name = input("Enter your name: ")
+    if len(seats) == 0:
+        print("Sorry, all seats are booked!")
+        return
+    seat = seats.pop(0)
+    bookings[name] = seat
+    print("Ticket booked for", name, "on seat number", seat)
+
+# Function to check booking status
+def check_booking_status():
+    name = input("Enter your name: ")
+    if name in bookings:
+        print(name, "has booked seat number", bookings[name])
+    else:
+        print(name, "has not booked any seat yet")
+
+# Function to cancel a booking
+def cancel_booking():
+    name = input("Enter your name: ")
+    if name in bookings:
+        seat = bookings[name]
+        seats.append(seat)
+        del bookings[name]
+        print("Booking cancelled for", name, "on seat number", seat)
+    else:
+        print(name, "has not booked any seat yet")
+
+# Main function to display menu and handle user input
+def main():
+    while True:
+        print("1. Display available seats")
+        print("2. Book a ticket")
+        print("3. Check booking status")
+        print("4. Cancel a booking")
+        print("5. Exit")
+        choice = int(input("Enter your choice (1-5): "))
+        if choice == 1:
+            display_available_seats()
+        elif choice == 2:
+            book_ticket()
+        elif choice == 3:
+            check_booking_status()
+        elif choice == 4:
+            cancel_booking()
+        elif choice == 5:
+            break
+        else:
+            print("Invalid choice! Please try again.")
+
+if __name__ == '__main__':
+    main()
